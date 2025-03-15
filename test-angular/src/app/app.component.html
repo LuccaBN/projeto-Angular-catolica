@@ -1,0 +1,10 @@
+<h1>✅ Angular está funcionando!</h1>
+
+<mat-tab-group>
+  <mat-tab label="📋 Lista de Relatórios">
+    <app-relatorio-lista (editarRelatorio)="selecionarRelatorio($event)"></app-relatorio-lista>
+  </mat-tab>
+  <mat-tab label="➕ Criar / Editar Relatório">
+    <app-relatorio-form [relatorio]="relatorioSelecionado" (salvar)="salvarRelatorio()"></app-relatorio-form>
+  </mat-tab>
+</mat-tab-group>

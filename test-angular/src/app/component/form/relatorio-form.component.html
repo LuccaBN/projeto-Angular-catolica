@@ -1,0 +1,15 @@
+<h2>📝 Criar / Editar Relatório</h2>
+
+<form *ngIf="relatorio" (ngSubmit)="salvarRelatorio()">
+  <label for="titulo">Título:</label>
+  <input id="titulo" [(ngModel)]="relatorio.titulo" name="titulo" required>
+
+  <label for="descricao">Descrição:</label>
+  <textarea id="descricao" [(ngModel)]="relatorio.descricao" name="descricao" required></textarea>
+
+  <label for="autor">Autor:</label>
+  <input id="autor" [(ngModel)]="relatorio.autor" name="autor" required>
+
+  <button type="submit">💾 Salvar</button>
+  <button type="button" (click)="limparFormulario()">🧹 Limpar</button>
+</form>

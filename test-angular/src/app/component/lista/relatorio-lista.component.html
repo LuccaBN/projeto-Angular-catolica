@@ -1,0 +1,27 @@
+<h2>📋 Relatórios de Experiência</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Título</th>
+      <th>Descrição</th>
+      <th>Data</th>
+      <th>Autor</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let relatorio of relatorios">
+      <td>{{ relatorio.id }}</td>
+      <td>{{ relatorio.titulo }}</td>
+      <td>{{ relatorio.descricao }}</td>
+      <td>{{ relatorio.dataCriacao | date }}</td>
+      <td>{{ relatorio.autor }}</td>
+      <td>
+        <button (click)="editar(relatorio)">✏️ Editar</button>
+        <button (click)="deletarRelatorio(relatorio.id!)">🗑 Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
