@@ -6,7 +6,7 @@ import { RelatorioListaComponent } from './component/lista/relatorio-lista.compo
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RelatorioListaComponent, RelatorioFormComponent, MatTabsModule], // ✅ Correto
+  imports: [RelatorioListaComponent, RelatorioFormComponent, MatTabsModule], // ✅ Certifique-se de que tudo é um componente standalone
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

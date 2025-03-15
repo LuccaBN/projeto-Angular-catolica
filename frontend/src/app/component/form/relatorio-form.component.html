@@ -1,15 +1,25 @@
-<h2>📝 Criar / Editar Relatório</h2>
+<mat-card>
+  <h2>📝 Criar / Editar Relatório</h2>
 
-<form *ngIf="relatorio" (ngSubmit)="salvarRelatorio()">
-  <label for="titulo">Título:</label>
-  <input id="titulo" [(ngModel)]="relatorio.titulo" name="titulo" required>
+  <form *ngIf="relatorio" (ngSubmit)="salvarRelatorio()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Título</mat-label>
+      <input matInput [(ngModel)]="relatorio.titulo" name="titulo" required>
+    </mat-form-field>
 
-  <label for="descricao">Descrição:</label>
-  <textarea id="descricao" [(ngModel)]="relatorio.descricao" name="descricao" required></textarea>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput [(ngModel)]="relatorio.descricao" name="descricao" required></textarea>
+    </mat-form-field>
 
-  <label for="autor">Autor:</label>
-  <input id="autor" [(ngModel)]="relatorio.autor" name="autor" required>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Autor</mat-label>
+      <input matInput [(ngModel)]="relatorio.autor" name="autor" required>
+    </mat-form-field>
 
-  <button type="submit">💾 Salvar</button>
-  <button type="button" (click)="limparFormulario()">🧹 Limpar</button>
-</form>
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit">💾 Salvar</button>
+      <button mat-stroked-button color="warn" type="button" (click)="limparFormulario()">🧹 Limpar</button>
+    </div>
+  </form>
+</mat-card>

@@ -1,27 +1,35 @@
 <h2>📋 Relatórios de Experiência</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Título</th>
-      <th>Descrição</th>
-      <th>Data</th>
-      <th>Autor</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let relatorio of relatorios">
-      <td>{{ relatorio.id }}</td>
-      <td>{{ relatorio.titulo }}</td>
-      <td>{{ relatorio.descricao }}</td>
-      <td>{{ relatorio.dataCriacao | date }}</td>
-      <td>{{ relatorio.autor }}</td>
-      <td>
-        <button (click)="editar(relatorio)">✏️ Editar</button>
-        <button (click)="deletarRelatorio(relatorio.id!)">🗑 Excluir</button>
+<mat-card>
+  <table mat-table [dataSource]="relatorios" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let relatorio">{{ relatorio.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="titulo">
+      <th mat-header-cell *matHeaderCellDef> Título </th>
+      <td mat-cell *matCellDef="let relatorio">{{ relatorio.titulo }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="descricao">
+      <th mat-header-cell *matHeaderCellDef> Descrição </th>
+      <td mat-cell *matCellDef="let relatorio">{{ relatorio.descricao }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let relatorio">
+        <button mat-icon-button color="primary" (click)="editar(relatorio)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deletarRelatorio(relatorio.id!)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </td>
-    </tr>
-  </tbody>
-</table>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card>
