@@ -10,9 +10,15 @@ import { RelatorioExperienciaService } from '../../services/relatorio-experienci
 @Component({
   selector: 'app-relatorio-lista',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule, MatCardModule],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+  ],
   templateUrl: './relatorio-lista.component.html',
-  styleUrls: ['./relatorio-lista.component.scss']
+  styleUrls: ['./relatorio-lista.component.scss'],
 })
 export class RelatorioListaComponent implements OnInit {
   relatorios: RelatorioExperiencia[] = [];
@@ -37,10 +43,8 @@ export class RelatorioListaComponent implements OnInit {
   }
 
   deletarRelatorio(id: number): void {
-    if (confirm('Tem certeza que deseja excluir este relatório?')) {
-      this.relatorioService.deletarRelatorio(id).subscribe(() => {
-        this.carregarRelatorios();
-      });
-    }
+    this.relatorioService.deletarRelatorio(id).subscribe(() => {
+      this.carregarRelatorios();
+    });
   }
 }

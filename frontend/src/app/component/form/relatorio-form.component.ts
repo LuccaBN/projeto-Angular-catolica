@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -10,49 +11,36 @@ import { RelatorioExperienciaService } from '../../services/relatorio-experienci
 @Component({
   selector: 'app-relatorio-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatInputModule, MatButtonModule, MatCardModule], // ✅ Material UI
+  imports: [CommonModule, FormsModule, MatInputModule, MatButtonModule, MatCardModule],
   templateUrl: './relatorio-form.component.html',
   styleUrls: ['./relatorio-form.component.scss']
 })
 export class RelatorioFormComponent {
-  @Input() relatorio: RelatorioExperiencia | null = null;
-  @Output() salvar = new EventEmitter<void>();
+  relatorio: RelatorioExperiencia;
 
-  constructor(private relatorioService: RelatorioExperienciaService) {}
-
-  ngOnInit(): void {
-    if (!this.relatorio) {
-      this.relatorio = {
-        titulo: '',
-        descricao: '',
-        dataCriacao: new Date().toISOString().split('T')[0],
-        autor: ''
-      };
-    }
+  constructor(
+    private relatorioService: RelatorioExperienciaService,
+    private dialogRef: MatDialogRef<RelatorioFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: RelatorioExperiencia | null
+  ) {
+    this.relatorio = data
+      ? { ...data }
+      : { titulo: '', descricao: '', dataCriacao: new Date().toISOString().split('T')[0], autor: '' };
   }
 
   salvarRelatorio(): void {
-    if (this.relatorio?.id) {
+    if (this.relatorio.id) {
       this.relatorioService.atualizarRelatorio(this.relatorio.id, this.relatorio).subscribe(() => {
-        alert('Relatório atualizado com sucesso!');
-        this.salvar.emit();
-        this.limparFormulario();
+        this.dialogRef.close(true); // 🔄 Fecha o dialog e retorna TRUE para indicar que algo foi salvo
       });
     } else {
-      this.relatorioService.criarRelatorio(this.relatorio!).subscribe(() => {
-        alert('Relatório criado com sucesso!');
-        this.salvar.emit();
-        this.limparFormulario();
+      this.relatorioService.criarRelatorio(this.relatorio).subscribe(() => {
+        this.dialogRef.close(true); // 🔄 Fecha o dialog e retorna TRUE para indicar que algo foi salvo
       });
     }
   }
 
-  limparFormulario(): void {
-    this.relatorio = {
-      titulo: '',
-      descricao: '',
-      dataCriacao: new Date().toISOString().split('T')[0],
-      autor: ''
-    };
+  fecharDialog(): void {
+    this.dialogRef.close(false); // ❌ Retorna FALSE para indicar que nada foi salvo
   }
 }

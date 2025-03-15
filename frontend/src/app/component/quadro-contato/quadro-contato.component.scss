@@ -1,0 +1,27 @@
+.contato-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.whatsapp-btn {
+  background-color: #25D366 !important;
+  color: white !important;
+  font-size: 18px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s ease-in-out;
+  width: fit-content; /* Para ajustar ao tamanho do conteúdo */
+}
+
+.whatsapp-btn:hover {
+  background-color: #1ebe57 !important;
+}
