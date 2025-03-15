@@ -20,7 +20,7 @@
     <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef> Ações </th>
       <td mat-cell *matCellDef="let relatorio">
-        <button mat-icon-button color="primary" (click)="editar(relatorio)">
+        <button mat-icon-button color="primary" (click)="editar(relatorio.id!)">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button color="warn" (click)="deletarRelatorio(relatorio.id!)">

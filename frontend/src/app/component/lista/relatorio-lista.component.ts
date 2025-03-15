@@ -1,16 +1,16 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 import { RelatorioExperiencia } from '../../models/relatorio-experiencia.model';
 import { RelatorioExperienciaService } from '../../services/relatorio-experiencia.service';
 
 @Component({
   selector: 'app-relatorio-lista',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule, MatCardModule], // ✅ Material correto
+  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule, MatCardModule],
   templateUrl: './relatorio-lista.component.html',
   styleUrls: ['./relatorio-lista.component.scss']
 })
@@ -18,7 +18,7 @@ export class RelatorioListaComponent implements OnInit {
   relatorios: RelatorioExperiencia[] = [];
   displayedColumns: string[] = ['id', 'titulo', 'descricao', 'acoes'];
 
-  @Output() editarRelatorio = new EventEmitter<RelatorioExperiencia>();
+  @Output() editarRelatorio = new EventEmitter<number>(); // Agora passa apenas o ID
 
   constructor(private relatorioService: RelatorioExperienciaService) {}
 
@@ -32,8 +32,8 @@ export class RelatorioListaComponent implements OnInit {
     });
   }
 
-  editar(relatorio: RelatorioExperiencia): void {
-    this.editarRelatorio.emit(relatorio);
+  editar(id: number): void {
+    this.editarRelatorio.emit(id);
   }
 
   deletarRelatorio(id: number): void {

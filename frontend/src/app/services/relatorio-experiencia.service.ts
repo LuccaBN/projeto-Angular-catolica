@@ -7,7 +7,7 @@ import { RelatorioExperiencia } from '../models/relatorio-experiencia.model';
   providedIn: 'root'
 })
 export class RelatorioExperienciaService {
-  private apiUrl = 'http://localhost:8080/relatorios'; // Backend API
+  private apiUrl = 'http://localhost:8080/relatorios'; // URL do backend
 
   constructor(private http: HttpClient) {}
 
